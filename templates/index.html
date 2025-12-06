@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regresión Lineal Simple | UPIICSA</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+</head>
+<body>
+    <div id="notification-container"></div>
+
+    <div class="container main-layout">
+        <header class="main-header">
+            <div class="header-branding">
+                <h1>Regresión Lineal Simple</h1>
+                <p class="subtitle">Método de Mínimos Cuadrados Ordinarios</p>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon theme-btn" aria-label="Cambiar tema">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section class="panel input-section">
+                <div class="section-header">
+                   <h2><i class="fas fa-table"></i> 1. Datos Muestrales</h2>
+                </div>
+                
+                <div class="controls">
+                    <button onclick="agregarFila()" class="btn btn-secondary">
+                        <i class="fas fa-plus"></i> Agregar Fila
+                    </button>
+                    <button onclick="limpiarTabla()" class="btn btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i> Limpiar
+                    </button>
+                </div>
+                
+                <div class="table-container-wrapper">
+                    <table id="tablaDatos" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Variable X</th>
+                                <th>Variable Y</th>
+                                <th style="width: 60px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            </tbody>
+                    </table>
+                </div>
+
+                <div class="action-area">
+                    <button onclick="calcularRegresion()" class="btn btn-primary btn-lg">
+                        <i class="fas fa-calculator"></i> Calcular Modelo
+                    </button>
+                </div>
+            </section>
+
+            <div id="resultadosSection" class="hidden fade-in">
+                
+                <section class="panel graph-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> 2. Análisis Gráfico</h2>
+                    </div>
+                    <div id="miGrafica" class="plot-container"></div>
+                </section>
+
+                <section class="panel math-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-square-root-alt"></i> 3. Parámetros del Modelo</h2>
+                    </div>
+                    
+                    <div class="results-grid">
+                        <div class="result-card main-result">
+                            <h3>Ecuación Estimada</h3>
+                            <div class="math-display" id="resultadoEcuacion">y = a + bx</div>
+                        </div>
+                        <div class="result-card">
+                            <h3>Pendiente (b)</h3>
+                            <div class="formula-mini">b = Sxy / Sxx</div>
+                            <div id="sustitucionB" class="calculation-step">...</div>
+                        </div>
+                        <div class="result-card">
+                            <h3>Intersección (a)</h3>
+                            <div class="formula-mini">a = ȳ - b(x̄)</div>
+                            <div id="sustitucionA" class="calculation-step">...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel data-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-list-ol"></i> 4. Tabla de Cálculos Intermedios</h2>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="tablaResultados" class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>X²</th>
+                                    <th>X • Y</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                            <tfoot id="tablaTotales">
+                                </tfoot>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <footer class="main-footer">
+            <p>Proyecto de Estadística - Ingeniería UPIICSA</p>
+            <a href="https://github.com/RocketDev-TV/regresion-lineal" target="_blank" class="btn btn-github">
+                <i class="fab fa-github"></i> Ver Código en GitHub
+            </a>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
