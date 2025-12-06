@@ -21,7 +21,6 @@ function agregarFila() {
     const tbody = document.querySelector('#tablaDatos tbody');
     const tr = document.createElement('tr');
     
-    // AQUÍ ESTÁN LOS PLACEHOLDERS QUE PEDISTE
     tr.innerHTML = `
         <td><input type="number" step="any" class="form-control x-val" placeholder="Ej: 10.5"></td>
         <td><input type="number" step="any" class="form-control y-val" placeholder="Ej: 250.0"></td>
